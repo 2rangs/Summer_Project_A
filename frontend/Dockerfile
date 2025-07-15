@@ -1,17 +1,17 @@
-# 1. Node.js 베이스 이미지 사용
-FROM node:20-alpine
+FROM node:20-slim
 
-# 2. 작업 디렉토리 설정
-WORKDIR /app
+WORKDIR /frontend
 
-# 3. 의존성 설치에 필요한 파일 먼저 복사
+# package.json만 먼저 복사 (캐시 최적화용)
 COPY package*.json ./
 
-# 4. 의존성 설치
+# ❗️여기서 컨테이너 내부에서 설치 (호스트 X)
 RUN npm install
 
-# 5. 나머지 모든 파일 복사
+# 앱 전체 복사
 COPY . .
 
-# 6. Next.js 개발 서버 실행
+EXPOSE 3000
+ENV NODE_ENV=development
+
 CMD ["npm", "run", "dev"]
