@@ -1,9 +1,14 @@
-import RoadMonitorMap from '@/components/RoadMonitorMap';
+'use client';
 
-export default function Home() {
-  return (
-    <main className="relative h-screen w-screen">
-      <RoadMonitorMap />
-    </main>
-  );
+import { useRouter } from 'next/navigation';
+import {useEffect} from "react";
+
+export default function Page() {
+    const router = useRouter();
+
+    useEffect(() => {
+        router.push('/dashboard');
+    }, []);
+
+    return null;
 }
